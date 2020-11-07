@@ -9,7 +9,7 @@
 3. If you plan to edit the code, download all files within the src directory. You can ignore the META-INF directory. 
 *Note: You will still need the settings.txt file from the out/artifacts directory within your src directory in order to run the program. This file can obviously be edited along with your code edits
 4. If you would like to just use the application, download the files from the out/artifacts directory.
-*The settings file is preloaded with random settings which you can use without editing, if you'd like. If you'd like to edit these settings, however, the following form for the settings.txt file must be followed:
+*The settings file is preloaded with random settings which you can use without editing, if you'd like. If you'd like to edit these settings, however, the following form for the settings.txt file must be followed
 *Settings.txt form:
 * 1. rotor 1 - Ex) <a,b,c,d,...> (You should have no spaces between commas and letters)
 * 2. rotor 2 - Same as rotor 1
