@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="DigitalEnigmaMachine:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/DigitalEnigmaMachine_jar</output-path>
-    <root id="archive" name="DigitalEnigmaMachine.jar">
-      <element id="module-output" name="DigitalEnigmaMachine" />
-    </root>
-  </artifact>
-</component>
