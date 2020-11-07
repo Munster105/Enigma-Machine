@@ -8,13 +8,12 @@ import core.Rotor;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 
 public class EnigmaMachineUI {
     private Dimension screenSize;
-    private JFrame frame, settingsScreen;
-    private JMenuBar menuBar;
-    private JMenu settings;
-    private JMenuItem changeSettings;
+    private JFrame frame;
     private JPanel mainPanel, rotorsPanel, bottomPanel;
     private JPanel rotor1Panel, rotor2Panel, rotor3Panel;
     private JLabel rotor1Label, rotor2Label, rotor3Label;
@@ -24,15 +23,20 @@ public class EnigmaMachineUI {
     private JLabel output;
 
     private EnigmaMachine em;
+    private ArrayList<ArrayList<Character>> rotorSettings;
+    private HashMap<Character, Character> reflectorSettings;
+    private HashMap<Character, Character> pbSettings;
 
-    public EnigmaMachineUI(EnigmaMachine enigmaMachine){
+    public EnigmaMachineUI(){
+        // Set up enigma machine logic
+        setUpMachine();
+
         //Setting up vars used for other functionality
         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        em = enigmaMachine;
 
         //Setting up the frame
         frame = new JFrame();
-        frame.setTitle("Enimga Machine");
+        frame.setTitle("Enigma Machine");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setAutoRequestFocus(true);
@@ -43,69 +47,118 @@ public class EnigmaMachineUI {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setPreferredSize(new Dimension(600, 600));
 
-        setUpSettingsFrame();
-        setUpMenuBar();
         setUpRotorsPanel();
         setUpBottomPanel();
 
         rotorsPanel.setPreferredSize(new Dimension(600,500));
         bottomPanel.setPreferredSize(new Dimension(600, 500));
 
-        //Main content panel houses the rotorPanel and bottomPanel to enable more customizability to the layout of the panels
+        //Main content panel houses the rotorPanel and bottomPanel to enable a more customisable layout of the panels
         mainPanel.add(rotorsPanel, Component.CENTER_ALIGNMENT);
         mainPanel.add(Box.createVerticalGlue());
         mainPanel.add(bottomPanel, Component.CENTER_ALIGNMENT);
 
-        frame.setJMenuBar(menuBar);
         frame.getContentPane().add(mainPanel);
         frame.setMinimumSize(new Dimension(700, 700));
         frame.setVisible(true);
     }
 
-    public void setUpSettingsFrame(){
-        settingsScreen = new JFrame();
-        settingsScreen.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        settingsScreen.addWindowListener(new WindowListener() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.out.println("Testing 1");
+    public void setUpMachine(){
+        rotorSettings = new ArrayList<>();
+        reflectorSettings = new HashMap<>();
+        pbSettings = new HashMap<>();
+
+        try {
+            File file = new File("settings.txt");
+            Scanner input = new Scanner(file);
+
+            String temp;
+            // First three lines will be added to the rotors settings
+            for(int i = 0; i < 3 && input.hasNextLine(); i++){
+                ArrayList<Character> tempRotor = new ArrayList<>();
+                temp = input.nextLine();
+                temp = temp.substring(1, temp.length() - 1);
+
+                for(Character c : temp.toCharArray()){
+                    if(tempRotor.contains(c)){
+                        JOptionPane.showMessageDialog(frame, "You have a duplicate letter in rotor: " + (i + 1));
+                        System.exit(0);
+                    }
+                    else if(!c.equals(',')) {
+                        tempRotor.add(c);
+                    }
+                }
+                if(tempRotor.size() != Constants.numLetters){
+                    JOptionPane.showMessageDialog(frame, "You either have too many or not enough letters in rotor: " + (i + 1));
+                    System.exit(0);
+                }
+                rotorSettings.add(tempRotor);
             }
 
-            @Override
-            public void windowClosed(WindowEvent e) {
-                System.out.println("Testing 2");
+            // Next line is the reflector
+            temp = input.nextLine();
+            temp = temp.substring(1, temp.length()-1);
+            String pairTemp = "";
+            for(Character c : temp.toCharArray()){
+                // Add the character pairs
+                if(c.equals(')')){
+                    if(reflectorSettings.keySet().contains(pairTemp.charAt(0)) ||
+                        reflectorSettings.keySet().contains(pairTemp.charAt(1))){
+                        JOptionPane.showMessageDialog(frame, "The reflector settings has a duplicate value. Make sure that "
+                                + pairTemp.charAt(0) + " and " + pairTemp.charAt(1) + " only has one pairing each.");
+                        System.exit(0);
+                    }
+                    reflectorSettings.put(pairTemp.charAt(0), pairTemp.charAt(1));
+                    reflectorSettings.put(pairTemp.charAt(1), pairTemp.charAt(0));
+                    pairTemp = "";
+                }
+                else if(!c.equals('(') && !c.equals(',')){
+                    pairTemp += c;
+                }
+            }
+            if(reflectorSettings.keySet().size() != Constants.numLetters){
+                JOptionPane.showMessageDialog(frame, "The reflector setting has either too many or not enough settings." +
+                        " Make sure you have 13 pairs of characters with no repeating characters.");
+                System.exit(0);
             }
 
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        settingsScreen.setVisible(true);
-    }
-
-    public void setUpMenuBar(){
-        //Setting up menuBar
-        menuBar = new JMenuBar();
-        settings = new JMenu("Settings");
-        settingsScreen = new JFrame();
-
-        changeSettings = new JMenuItem("Change Settings");
-
-        settings.add(changeSettings);
-        menuBar.add(settings);
-
-        changeSettings.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+            // Last line is the plugboard
+            temp = input.nextLine();
+            temp = temp.substring(1, temp.length() - 1);
+            for(Character c : temp.toCharArray()){
+                // Add the character pairs
+                if(c.equals(')')){
+                    if(pbSettings.keySet().contains(pairTemp.charAt(0)) ||
+                        pbSettings.keySet().contains(pairTemp.charAt(1))){
+                        JOptionPane.showMessageDialog(frame, "The plug board settings has a duplicate value. Make sure "
+                                + pairTemp.charAt(0) + " and " + pairTemp.charAt(1) + " only has one pairing each.");
+                        System.exit(0);
+                    }
+                    pbSettings.put(pairTemp.charAt(0), pairTemp.charAt(1));
+                    pbSettings.put(pairTemp.charAt(1), pairTemp.charAt(0));
+                    pairTemp = "";
+                }
+                else if(!c.equals('(') && !c.equals(',')){
+                    pairTemp += c;
+                }
             }
-        });
+            if(pbSettings.keySet().size() > Constants.numLetters){
+                JOptionPane.showMessageDialog(frame, "The plug board setting has too many settings." +
+                        " Make sure that you have, at most, 13 pairs of characters with no repeating characters.");
+                System.exit(0);
+            }
+
+        }
+        catch(FileNotFoundException e){
+            // This outputs the current directory for testing purposes
+            System.out.println(System.getProperty("user.dir"));
+            // Alert the user that the settings file wasn't found
+            JOptionPane.showMessageDialog(frame, "There was an error trying to find the settings file. Please make sure" +
+                    " it is in the correct directory.");
+            System.exit(0);
+        }
+
+        em = new EnigmaMachine(rotorSettings, pbSettings, reflectorSettings);
     }
 
     public void setUpRotorsPanel(){
@@ -260,9 +313,9 @@ public class EnigmaMachineUI {
     }
 
     public void setUpBottomPanel(){
-        //Bottom panel intialization
+        //Bottom panel initialization
         bottomPanel = new JPanel();
-        bottomPanel.setBorder(BorderFactory.createTitledBorder("Bottom Panel"));
+        bottomPanel.setBorder(BorderFactory.createTitledBorder(""));
         bottomPanel.setLayout(new GridLayout(1, 2));
 
         //Need an input field for inputting characters to encode
@@ -277,12 +330,15 @@ public class EnigmaMachineUI {
                 if(e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z') {
                     input.setText(String.valueOf(e.getKeyChar()));
                     output.setText(em.useMachine(e.getKeyChar()).toString());
+                    // We can't just get the num spins because that is not always the right value if the user changes the rotor position
+                    // We know that the first rotor should spin on every keypress
                     rotor1Position = (rotor1Position + 1 > Constants.numLetters) ? 1 : (rotor1Position + 1);
                     //Checking if the rotor has spun
-                    if (em.getRotors().get(1).getNumSpins() > em.getRotors().get(1).getPrevNumSpins())
+                    if (em.getRotors().get(1).getNumSpins() != em.getRotors().get(1).getPrevNumSpins())
+                        // If so, then set the rotorPosition "tag" to the new tag.
                         rotor2Position = (rotor2Position + 1 > Constants.numLetters) ? 1 : (rotor2Position + 1);
                     //Checking if the rotor has spun
-                    if (em.getRotors().get(2).getNumSpins() > em.getRotors().get(2).getPrevNumSpins())
+                    if (em.getRotors().get(2).getNumSpins() != em.getRotors().get(2).getPrevNumSpins())
                         rotor3Position = (rotor3Position + 1 > Constants.numLetters) ? 1 : (rotor3Position + 1);
                     rotor1Label.setText(String.valueOf(rotor1Position));
                     rotor2Label.setText(String.valueOf(rotor2Position));

@@ -4,6 +4,7 @@ import javax.swing.text.PlainDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 
+// Limits what can be typed into the input section
 public class JTextFieldLimit extends PlainDocument {
     private int limit;
 

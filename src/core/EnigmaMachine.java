@@ -1,163 +1,26 @@
 package core;
 
 import constants.Constants;
-
 import java.util.*;
 
-//DONE
 public class EnigmaMachine {
     private PlugBoard pb;
     private Reflector reflector;
     private ArrayList<Rotor> rotors;
 
-    public EnigmaMachine(){
-        initComponents();
+    public EnigmaMachine(ArrayList<ArrayList<Character>> rotorSettings, HashMap<Character, Character> pbTemp, HashMap<Character, Character> reflectorTemp){
+        initComponents(rotorSettings, pbTemp, reflectorTemp);
     }
 
-    private void initComponents(){
-        //Here we can set the value of what the pb should be then pass this hashmap to the initalization function
-        //Yes we can just pull this into one class and make a hashmap called pb, but I wanted to work with more classes.
-        HashMap<Character, Character> pbTemp = new HashMap<>()
-        {
-            {
-                put('a', 'b');
-                put('b', 'a');
-            }
-        };
-
+    private void initComponents(ArrayList<ArrayList<Character>> rotorSettings, HashMap<Character, Character> pbTemp, HashMap<Character, Character> reflectorTemp){
         pb = new PlugBoard(pbTemp);
 
-        //Same thing but for reflector
-        HashMap<Character, Character> reflectorTemp = new HashMap<>(){
-            {
-                put('a', 'z');
-                put('b', 'y');
-                put('c', 'x');
-                put('d', 'w');
-                put('e', 'v');
-                put('f', 'u');
-                put('g', 't');
-                put('h', 's');
-                put('i', 'r');
-                put('j', 'q');
-                put('k', 'p');
-                put('l', 'o');
-                put('m', 'n');
-                put('n', 'm');
-                put('o', 'l');
-                put('p', 'k');
-                put('q', 'j');
-                put('r', 'i');
-                put('s', 'h');
-                put('t', 'g');
-                put('u', 'f');
-                put('v', 'e');
-                put('w', 'd');
-                put('x', 'c');
-                put('y', 'b');
-                put('z', 'a');
-            }
-        };
         reflector = new Reflector(reflectorTemp);
 
-        //Left side of rotors
-        ArrayList<Character> inputSideTemp1 = new ArrayList<>(){
-            {
-                add('d');
-                add('j');
-                add('x');
-                add('p');
-                add('i');
-                add('w');
-                add('z');
-                add('f');
-                add('r');
-                add('m');
-                add('q');
-                add('h');
-                add('k');
-                add('b');
-                add('g');
-                add('e');
-                add('t');
-                add('l');
-                add('o');
-                add('n');
-                add('y');
-                add('s');
-                add('v');
-                add('a');
-                add('u');
-                add('c');
-            }
-        };
-
-        ArrayList<Character> inputSideTemp2 = new ArrayList<>(){
-            {
-                add('w');
-                add('e');
-                add('d');
-                add('m');
-                add('h');
-                add('y');
-                add('u');
-                add('v');
-                add('b');
-                add('q');
-                add('k');
-                add('a');
-                add('o');
-                add('j');
-                add('l');
-                add('z');
-                add('r');
-                add('i');
-                add('x');
-                add('c');
-                add('t');
-                add('f');
-                add('p');
-                add('n');
-                add('s');
-                add('g');
-            }
-        };
-
-        ArrayList<Character> inputSideTemp3 = new ArrayList<>(){
-            {
-                add('x');
-                add('g');
-                add('b');
-                add('y');
-                add('v');
-                add('w');
-                add('q');
-                add('p');
-                add('i');
-                add('j');
-                add('z');
-                add('c');
-                add('h');
-                add('o');
-                add('t');
-                add('r');
-                add('s');
-                add('k');
-                add('e');
-                add('l');
-                add('a');
-                add('d');
-                add('m');
-                add('n');
-                add('u');
-                add('f');
-            }
-        };
-
         rotors = new ArrayList<>();
-        Rotor rotor1 = new Rotor(1, inputSideTemp1);
-        Rotor rotor2 = new Rotor(2, inputSideTemp2);
-        Rotor rotor3 = new Rotor(3, inputSideTemp3);
+        Rotor rotor1 = new Rotor(1, rotorSettings.get(0));
+        Rotor rotor2 = new Rotor(2, rotorSettings.get(1));
+        Rotor rotor3 = new Rotor(3, rotorSettings.get(2));
         rotors.add(rotor1);
         rotors.add(rotor2);
         rotors.add(rotor3);
@@ -202,7 +65,7 @@ public class EnigmaMachine {
                 r.setNumSpins(r.getNumSpins() + 1);
                 //Then evaluate if you're done rotating
                 prevComplete = r.getNumSpins() >= Constants.numLetters;
-                System.out.println(prevComplete);
+                System.out.println(prevComplete + "////////////////////////////////////////////");
                 //If so, reset spin counter and prevComplete = true
                 if(prevComplete){
                     r.setNumSpins(0);

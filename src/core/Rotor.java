@@ -3,9 +3,7 @@ package core;
 import constants.Constants;
 import java.util.*;
 
-//DONE
 public class Rotor {
-    //Changes need to be made!!
     private List<Character> InputSide;
     private List<Character> OutputSide;
     private int rotorNum;
@@ -16,9 +14,6 @@ public class Rotor {
         this.OutputSide = Arrays.asList(getOutputList(InputSide));
         this.rotorNum = rotorNum;
         this.numSpins = 0;
-//        System.out.println("Input side: " + InputSide);
-//        System.out.println("Output side: " + OutputSide);
-//        System.out.println("NumSpins: " + numSpins);
     }
 
     private Character[] getOutputList(List<Character> input){
@@ -42,7 +37,7 @@ public class Rotor {
         List<Character> buffer = new ArrayList<>(this.InputSide);
         System.out.println("Spinning rotor num: " + this.rotorNum);
         for(int i = 0; i < this.InputSide.size(); i++){
-            int index = ((i-1)+ Constants.numLetters)% Constants.numLetters;
+            int index = ((i - 1)+ Constants.numLetters)% Constants.numLetters;
             Character temp = this.InputSide.get(index);
             if(temp == Constants.lastLetter){
                 temp = 'a';

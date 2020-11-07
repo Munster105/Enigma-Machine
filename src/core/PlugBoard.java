@@ -2,7 +2,6 @@ package core;
 
 import java.util.HashMap;
 
-//DONE!
 public class PlugBoard {
     private HashMap<Character, Character> board;
 

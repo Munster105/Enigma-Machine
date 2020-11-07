@@ -1,0 +1,5 @@
+<b,p,z,i,t,x,k,h,f,g,o,q,a,c,y,d,s,u,m,e,j,r,w,n,l,v>
+<x,e,s,z,y,v,o,c,j,a,k,h,t,b,m,p,u,d,r,g,n,i,l,f,w,q>
+<x,f,h,o,b,q,n,g,j,p,s,c,m,e,y,k,t,v,z,w,d,r,i,a,u,l>
+<(a,z),(b,y),(c,x),(d,w),(e,v),(f,u),(g,t)(h,s),(i,r),(j,q),(k,p),(l,o),(m,n)>
+<(a,z),(b,y),(c,x),(d,w),(e,v),(f,u),(g,t)(h,s),(i,r),(j,q),(k,p),(l,o),(m,n)>
