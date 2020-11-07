@@ -11,13 +11,13 @@ This code aims to emulate the enigma machine. When run, the program allows the u
      * Note: You will still need the settings.txt file from the out/artifacts directory within your src directory in order to run the program. This file can obviously be edited along with your code edits
 4. If you would like to just use the application, download the files from the out/artifacts directory.
      * The settings file is preloaded with random settings which you can use without editing, if you'd like. If you'd like to edit these settings, however, the following form for the settings.txt file must be followed
- Settings.txt form: 
- --------------------
- rotor 1 - Ex) <a,b,c,d,...> (You should have no spaces between commas and letters) 
- rotor 2 - Same as rotor 1 
- rotor 3 - Same as rotor 2 
- reflector - Ex) <(a,b),(c,d),...> (You must have 13 pairs for this section. Each letter should only have 1 pairing as well.) 
- plugboard - Same as reflector, however, you can have anywhere from 0 to 13 pairs. 
+ |Settings.txt form:| 
+ |------------------|
+ |rotor 1 - Ex) <a,b,c,d,...> (You should have no spaces between commas and letters)|
+ |rotor 2 - Same as rotor 1|
+ |rotor 3 - Same as rotor 2|
+ |reflector - Ex) <(a,b),(c,d),...> (You must have 13 pairs for this section. Each letter should only have 1 pairing as well.)|
+ |plugboard - Same as reflector, however, you can have anywhere from 0 to 13 pairs.|
       * The program must be restarted in order to use your most recent updated to the settings.txt file.
  
 ### More information:
