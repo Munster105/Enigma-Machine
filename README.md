@@ -8,16 +8,17 @@ This code aims to emulate the enigma machine. When run, the program allows the u
 1. Must have JDK 13 or higher
 2. Must have the Java Swing and Java AWT Libraries
 3. If you plan to edit the code, download all files within the src directory. You can ignore the META-INF directory. 
- * Note: You will still need the settings.txt file from the out/artifacts directory within your src directory in order to run the program. This file can obviously be edited along with your code edits
+     * Note: You will still need the settings.txt file from the out/artifacts directory within your src directory in order to run the program. This file can obviously be edited along with your code edits
 4. If you would like to just use the application, download the files from the out/artifacts directory.
- * The settings file is preloaded with random settings which you can use without editing, if you'd like. If you'd like to edit these settings, however, the following form for the settings.txt file must be followed
- * Settings.txt form:
- * 1. rotor 1 - Ex) <a,b,c,d,...> (You should have no spaces between commas and letters)
- * 2. rotor 2 - Same as rotor 1
- * 3. rotor 3 - Same as rotor 2
- * 4. reflector - Ex) <(a,b),(c,d),...> (You must have 13 pairs for this section. Each letter should only have 1 pairing as well.)
- * 5. plugboard - Same as reflector, however, you can have anywhere from 0 to 13 pairs.
- * * The program must be restarted in order to use your most recent updated to the settings.txt file.
+     * The settings file is preloaded with random settings which you can use without editing, if you'd like. If you'd like to edit these settings, however, the following form for the settings.txt file must be followed
+ Settings.txt form: |
+ --------------------
+ rotor 1 - Ex) <a,b,c,d,...> (You should have no spaces between commas and letters) |
+ rotor 2 - Same as rotor 1 |
+ rotor 3 - Same as rotor 2 |
+ reflector - Ex) <(a,b),(c,d),...> (You must have 13 pairs for this section. Each letter should only have 1 pairing as well.) |
+ plugboard - Same as reflector, however, you can have anywhere from 0 to 13 pairs. |
+      * The program must be restarted in order to use your most recent updated to the settings.txt file. |
  
 ### More information:
 * https://en.wikipedia.org/wiki/Alan_Turing
