@@ -7,9 +7,8 @@ This code aims to emulate the enigma machine. When run, the program allows the u
 # NEEDS UPDATES
 # Let's make this a maven project so people can easily clone and build the repo for easy use
 ### How to use:
-1. Must have JDK 13 or higher
-2. Must have the Java Swing and Java AWT Libraries
-4. Updating the settings file
+1. Must have the Java Swing and Java AWT Libraries
+2. Updating the settings file
     * The settings file is preloaded with random settings which you can use without editing, if you'd like. If you'd like to edit these settings, however, the following form for the settings.txt file must be followed
     * Settings.txt form:
     * rotor 1 - Ex) <a,b,c,d,...> (You should have no spaces between commas and letters)
