@@ -69,6 +69,7 @@ public class EnigmaMachineUI {
         pbSettings = new HashMap<>();
 
         try {
+            // Put the settings into an object so we can make it editable in the application and not have the settings live in a external text file
             File file = new File("settings.txt");
             Scanner input = new Scanner(file);
 
