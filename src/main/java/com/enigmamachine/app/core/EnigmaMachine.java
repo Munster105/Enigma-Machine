@@ -8,16 +8,16 @@ public class EnigmaMachine {
     private Reflector reflector;
     private ArrayList<Rotor> rotors;
 
-    public EnigmaMachine(ArrayList<ArrayList<Character>> rotorSettings, HashMap<Character, Character> pbTemp,
-            HashMap<Character, Character> reflectorTemp) {
-        initComponents(rotorSettings, pbTemp, reflectorTemp);
+    public EnigmaMachine(ArrayList<ArrayList<Character>> rotorSettings, HashMap<Character, Character> pbSettings,
+            HashMap<Character, Character> reflectorSettings) {
+        initComponents(rotorSettings, pbSettings, reflectorSettings);
     }
 
-    private void initComponents(ArrayList<ArrayList<Character>> rotorSettings, HashMap<Character, Character> pbTemp,
-            HashMap<Character, Character> reflectorTemp) {
-        pb = new PlugBoard(pbTemp);
+    private void initComponents(ArrayList<ArrayList<Character>> rotorSettings, HashMap<Character, Character> pbSettings,
+            HashMap<Character, Character> reflectorSettings) {
+        pb = new PlugBoard(pbSettings);
 
-        reflector = new Reflector(reflectorTemp);
+        reflector = new Reflector(reflectorSettings);
 
         rotors = new ArrayList<>();
         Rotor rotor1 = new Rotor(1, rotorSettings.get(0));

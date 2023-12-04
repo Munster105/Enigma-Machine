@@ -27,14 +27,14 @@ public class EnigmaMachineUI {
     private HashMap<Character, Character> reflectorSettings;
     private HashMap<Character, Character> pbSettings;
 
-    public EnigmaMachineUI(){
+    public EnigmaMachineUI() {
         // Set up enigma machine logic
         setUpMachine();
 
-        //Setting up vars used for other functionality
+        // Setting up vars used for other functionality
         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        //Setting up the frame
+        // Setting up the frame
         frame = new JFrame();
         frame.setTitle("Enigma Machine");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +42,7 @@ public class EnigmaMachineUI {
         frame.setAutoRequestFocus(true);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        //Initializing the main panel that will house all panels for the main screen
+        // Initializing the main panel that will house all panels for the main screen
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setPreferredSize(new Dimension(600, 600));
@@ -50,10 +50,11 @@ public class EnigmaMachineUI {
         setUpRotorsPanel();
         setUpBottomPanel();
 
-        rotorsPanel.setPreferredSize(new Dimension(600,500));
+        rotorsPanel.setPreferredSize(new Dimension(600, 500));
         bottomPanel.setPreferredSize(new Dimension(600, 500));
 
-        //Main content panel houses the rotorPanel and bottomPanel to enable a more customisable layout of the panels
+        // Main content panel houses the rotorPanel and bottomPanel to enable a more
+        // customisable layout of the panels
         mainPanel.add(rotorsPanel, Component.CENTER_ALIGNMENT);
         mainPanel.add(Box.createVerticalGlue());
         mainPanel.add(bottomPanel, Component.CENTER_ALIGNMENT);
@@ -63,34 +64,36 @@ public class EnigmaMachineUI {
         frame.setVisible(true);
     }
 
-    public void setUpMachine(){
+    public void setUpMachine() {
         rotorSettings = new ArrayList<>();
         reflectorSettings = new HashMap<>();
         pbSettings = new HashMap<>();
 
         try {
-            // Put the settings into an object so we can make it editable in the application and not have the settings live in a external text file
+            // Put the settings into an object so we can make it editable in the application
+            // and not have the settings live in a external text file
             File file = new File("settings.txt");
             Scanner input = new Scanner(file);
 
             String temp;
+
             // First three lines will be added to the rotors settings
-            for(int i = 0; i < 3 && input.hasNextLine(); i++){
+            for (int i = 0; i < 3 && input.hasNextLine(); i++) {
                 ArrayList<Character> tempRotor = new ArrayList<>();
                 temp = input.nextLine();
                 temp = temp.substring(1, temp.length() - 1);
 
-                for(Character c : temp.toCharArray()){
-                    if(tempRotor.contains(c)){
+                for (Character c : temp.toCharArray()) {
+                    if (tempRotor.contains(c)) {
                         JOptionPane.showMessageDialog(frame, "You have a duplicate letter in rotor: " + (i + 1));
                         System.exit(0);
-                    }
-                    else if(!c.equals(',')) {
+                    } else if (!c.equals(',')) {
                         tempRotor.add(c);
                     }
                 }
-                if(tempRotor.size() != Constants.numLetters){
-                    JOptionPane.showMessageDialog(frame, "You either have too many or not enough letters in rotor: " + (i + 1));
+                if (tempRotor.size() != Constants.numLetters) {
+                    JOptionPane.showMessageDialog(frame,
+                            "You either have too many or not enough letters in rotor: " + (i + 1));
                     System.exit(0);
                 }
                 rotorSettings.add(tempRotor);
@@ -98,39 +101,41 @@ public class EnigmaMachineUI {
 
             // Next line is the reflector
             temp = input.nextLine();
-            temp = temp.substring(1, temp.length()-1);
+            temp = temp.substring(1, temp.length() - 1);
             String pairTemp = "";
-            for(Character c : temp.toCharArray()){
+            for (Character c : temp.toCharArray()) {
                 // Add the character pairs
-                if(c.equals(')')){
-                    if(reflectorSettings.keySet().contains(pairTemp.charAt(0)) ||
-                        reflectorSettings.keySet().contains(pairTemp.charAt(1))){
-                        JOptionPane.showMessageDialog(frame, "The reflector settings has a duplicate value. Make sure that "
-                                + pairTemp.charAt(0) + " and " + pairTemp.charAt(1) + " only has one pairing each.");
+                if (c.equals(')')) {
+                    if (reflectorSettings.keySet().contains(pairTemp.charAt(0)) ||
+                            reflectorSettings.keySet().contains(pairTemp.charAt(1))) {
+                        JOptionPane.showMessageDialog(frame,
+                                "The reflector settings has a duplicate value. Make sure that "
+                                        + pairTemp.charAt(0) + " and " + pairTemp.charAt(1)
+                                        + " only has one pairing each.");
                         System.exit(0);
                     }
                     reflectorSettings.put(pairTemp.charAt(0), pairTemp.charAt(1));
                     reflectorSettings.put(pairTemp.charAt(1), pairTemp.charAt(0));
                     pairTemp = "";
-                }
-                else if(!c.equals('(') && !c.equals(',')){
+                } else if (!c.equals('(') && !c.equals(',')) {
                     pairTemp += c;
                 }
             }
-            if(reflectorSettings.keySet().size() != Constants.numLetters){
-                JOptionPane.showMessageDialog(frame, "The reflector setting has either too many or not enough settings." +
-                        " Make sure you have 13 pairs of characters with no repeating characters.");
+            if (reflectorSettings.keySet().size() != Constants.numLetters) {
+                JOptionPane.showMessageDialog(frame,
+                        "The reflector setting has either too many or not enough settings." +
+                                " Make sure you have 13 pairs of characters with no repeating characters.");
                 System.exit(0);
             }
 
             // Last line is the plugboard
             temp = input.nextLine();
             temp = temp.substring(1, temp.length() - 1);
-            for(Character c : temp.toCharArray()){
+            for (Character c : temp.toCharArray()) {
                 // Add the character pairs
-                if(c.equals(')')){
-                    if(pbSettings.keySet().contains(pairTemp.charAt(0)) ||
-                        pbSettings.keySet().contains(pairTemp.charAt(1))){
+                if (c.equals(')')) {
+                    if (pbSettings.keySet().contains(pairTemp.charAt(0)) ||
+                            pbSettings.keySet().contains(pairTemp.charAt(1))) {
                         JOptionPane.showMessageDialog(frame, "The plug board settings has a duplicate value. Make sure "
                                 + pairTemp.charAt(0) + " and " + pairTemp.charAt(1) + " only has one pairing each.");
                         System.exit(0);
@@ -138,36 +143,33 @@ public class EnigmaMachineUI {
                     pbSettings.put(pairTemp.charAt(0), pairTemp.charAt(1));
                     pbSettings.put(pairTemp.charAt(1), pairTemp.charAt(0));
                     pairTemp = "";
-                }
-                else if(!c.equals('(') && !c.equals(',')){
+                } else if (!c.equals('(') && !c.equals(',')) {
                     pairTemp += c;
                 }
             }
-            if(pbSettings.keySet().size() > Constants.numLetters){
+            if (pbSettings.keySet().size() > Constants.numLetters) {
                 JOptionPane.showMessageDialog(frame, "The plug board setting has too many settings." +
                         " Make sure that you have, at most, 13 pairs of characters with no repeating characters.");
                 System.exit(0);
             }
 
-        }
-        catch(FileNotFoundException e){
-            // This outputs the current directory for testing purposes
-            System.out.println(System.getProperty("user.dir"));
+        } catch (FileNotFoundException e) {
             // Alert the user that the settings file wasn't found
-            JOptionPane.showMessageDialog(frame, "There was an error trying to find the settings file. Please make sure" +
-                    " it is in the correct directory.");
+            JOptionPane.showMessageDialog(frame,
+                    "There was an error trying to find the settings file. Please make sure" +
+                            " it is in the correct directory.");
             System.exit(0);
         }
 
         em = new EnigmaMachine(rotorSettings, pbSettings, reflectorSettings);
     }
 
-    public void setUpRotorsPanel(){
+    public void setUpRotorsPanel() {
         rotorsPanel = new JPanel();
         rotorsPanel.setLayout(new BoxLayout(rotorsPanel, BoxLayout.X_AXIS));
         rotorsPanel.setBorder(BorderFactory.createTitledBorder("Rotors"));
 
-        //Rotor1
+        // Rotor1
         rotor1Panel = new JPanel();
         rotor1Panel.setLayout(new BoxLayout(rotor1Panel, BoxLayout.Y_AXIS));
         rotor1Panel.setBorder(BorderFactory.createTitledBorder("Rotor 1"));
@@ -182,7 +184,7 @@ public class EnigmaMachineUI {
         rotor1Up.addActionListener(e -> {
             rotor1Position = (rotor1Position + 1 > Constants.numLetters) ? 1 : (rotor1Position + 1);
             em.getRotors().get(0).spinRotor();
-            for(Rotor r : em.getRotors()){
+            for (Rotor r : em.getRotors()) {
                 r.setNumSpins(0);
                 r.setPrevNumSpins(0);
             }
@@ -195,7 +197,7 @@ public class EnigmaMachineUI {
         rotor1Down.addActionListener(e -> {
             rotor1Position = (rotor1Position - 1 < 1) ? Constants.numLetters : (rotor1Position - 1);
             em.getRotors().get(0).reverseRotor();
-            for(Rotor r : em.getRotors()){
+            for (Rotor r : em.getRotors()) {
                 r.setNumSpins(0);
                 r.setPrevNumSpins(0);
             }
@@ -208,7 +210,7 @@ public class EnigmaMachineUI {
         rotor1Panel.add(Box.createVerticalGlue());
         rotor1Panel.add(rotor1Down);
 
-        //Rotor 2
+        // Rotor 2
         rotor2Panel = new JPanel();
         rotor2Panel.setLayout(new BoxLayout(rotor2Panel, BoxLayout.Y_AXIS));
         rotor2Panel.setBorder(BorderFactory.createTitledBorder("Rotor 2"));
@@ -224,7 +226,7 @@ public class EnigmaMachineUI {
         rotor2Up.addActionListener(e -> {
             rotor2Position = (rotor2Position + 1 > Constants.numLetters) ? 1 : (rotor2Position + 1);
             em.getRotors().get(1).spinRotor();
-            for(Rotor r : em.getRotors()){
+            for (Rotor r : em.getRotors()) {
                 r.setNumSpins(0);
                 r.setPrevNumSpins(0);
             }
@@ -237,7 +239,7 @@ public class EnigmaMachineUI {
         rotor2Down.addActionListener(e -> {
             rotor2Position = (rotor2Position - 1 < 1) ? Constants.numLetters : (rotor2Position - 1);
             em.getRotors().get(1).reverseRotor();
-            for(Rotor r : em.getRotors()){
+            for (Rotor r : em.getRotors()) {
                 r.setNumSpins(0);
                 r.setPrevNumSpins(0);
             }
@@ -250,7 +252,7 @@ public class EnigmaMachineUI {
         rotor2Panel.add(Box.createVerticalGlue());
         rotor2Panel.add(rotor2Down);
 
-        //Rotor 3
+        // Rotor 3
         rotor3Panel = new JPanel();
         rotor3Panel.setLayout(new BoxLayout(rotor3Panel, BoxLayout.Y_AXIS));
         rotor3Panel.setBorder(BorderFactory.createTitledBorder("Rotor 3"));
@@ -266,7 +268,7 @@ public class EnigmaMachineUI {
         rotor3Up.addActionListener(e -> {
             rotor3Position = (rotor3Position + 1 > Constants.numLetters) ? 1 : (rotor3Position + 1);
             em.getRotors().get(2).spinRotor();
-            for(Rotor r : em.getRotors()){
+            for (Rotor r : em.getRotors()) {
                 r.setNumSpins(0);
                 r.setPrevNumSpins(0);
             }
@@ -279,7 +281,7 @@ public class EnigmaMachineUI {
         rotor3Down.addActionListener(e -> {
             rotor3Position = (rotor3Position - 1 < 1) ? Constants.numLetters : (rotor3Position - 1);
             em.getRotors().get(2).reverseRotor();
-            for(Rotor r : em.getRotors()){
+            for (Rotor r : em.getRotors()) {
                 r.setNumSpins(0);
                 r.setPrevNumSpins(0);
             }
@@ -292,9 +294,9 @@ public class EnigmaMachineUI {
         rotor3Panel.add(Box.createVerticalGlue());
         rotor3Panel.add(rotor3Down);
 
-        rotor1Panel.setPreferredSize(new Dimension(300,300));
-        rotor2Panel.setPreferredSize(new Dimension(300,300));
-        rotor3Panel.setPreferredSize(new Dimension(300,300));
+        rotor1Panel.setPreferredSize(new Dimension(300, 300));
+        rotor2Panel.setPreferredSize(new Dimension(300, 300));
+        rotor3Panel.setPreferredSize(new Dimension(300, 300));
 
         rotor1Label.setAlignmentX(Component.CENTER_ALIGNMENT);
         rotor1Up.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -313,13 +315,13 @@ public class EnigmaMachineUI {
         rotorsPanel.add(rotor3Panel);
     }
 
-    public void setUpBottomPanel(){
-        //Bottom panel initialization
+    public void setUpBottomPanel() {
+        // Bottom panel initialization
         bottomPanel = new JPanel();
         bottomPanel.setBorder(BorderFactory.createTitledBorder(""));
         bottomPanel.setLayout(new GridLayout(1, 2));
 
-        //Need an input field for inputting characters to encode
+        // Need an input field for inputting characters to encode
         input = new JTextField();
         input.setFont(new Font(Font.SERIF, Font.BOLD, 200));
         input.setHorizontalAlignment(JTextField.CENTER);
@@ -328,17 +330,18 @@ public class EnigmaMachineUI {
         input.addKeyListener(new KeyListener() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z') {
+                if (e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z') {
                     input.setText(String.valueOf(e.getKeyChar()));
                     output.setText(em.useMachine(e.getKeyChar()).toString());
-                    // We can't just get the num spins because that is not always the right value if the user changes the rotor position
+                    // We can't just get the num spins because that is not always the right value if
+                    // the user changes the rotor position
                     // We know that the first rotor should spin on every keypress
                     rotor1Position = (rotor1Position + 1 > Constants.numLetters) ? 1 : (rotor1Position + 1);
-                    //Checking if the rotor has spun
+                    // Checking if the rotor has spun
                     if (em.getRotors().get(1).getNumSpins() != em.getRotors().get(1).getPrevNumSpins())
                         // If so, then set the rotorPosition "tag" to the new tag.
                         rotor2Position = (rotor2Position + 1 > Constants.numLetters) ? 1 : (rotor2Position + 1);
-                    //Checking if the rotor has spun
+                    // Checking if the rotor has spun
                     if (em.getRotors().get(2).getNumSpins() != em.getRotors().get(2).getPrevNumSpins())
                         rotor3Position = (rotor3Position + 1 > Constants.numLetters) ? 1 : (rotor3Position + 1);
                     rotor1Label.setText(String.valueOf(rotor1Position));
@@ -347,11 +350,16 @@ public class EnigmaMachineUI {
                 }
             }
 
-            @Override public void keyReleased(KeyEvent e) {}
-            @Override public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
         });
 
-        //Need an output field for outputting encoded letters
+        // Need an output field for outputting encoded letters
         output = new JLabel("", SwingConstants.CENTER);
         output.setFont(new Font(Font.SERIF, Font.BOLD, 200));
         output.setHorizontalTextPosition(JLabel.CENTER);
