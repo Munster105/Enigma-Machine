@@ -1,9 +1,9 @@
-package ui;
+package com.enigmamachine.app.ui;
 
-import constants.Constants;
-import constants.JTextFieldLimit;
-import core.EnigmaMachine;
-import core.Rotor;
+import com.enigmamachine.app.constants.Constants;
+import com.enigmamachine.app.constants.JTextFieldLimit;
+import com.enigmamachine.app.core.EnigmaMachine;
+import com.enigmamachine.app.core.Rotor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -69,6 +69,7 @@ public class EnigmaMachineUI {
         pbSettings = new HashMap<>();
 
         try {
+            // Put the settings into an object so we can make it editable in the application and not have the settings live in a external text file
             File file = new File("settings.txt");
             Scanner input = new Scanner(file);
 

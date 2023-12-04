@@ -1,4 +1,4 @@
-package core;
+package com.enigmamachine.app.core;
 
 import java.util.HashMap;
 
