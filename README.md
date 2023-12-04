@@ -7,8 +7,13 @@ This code aims to emulate the enigma machine. When run, the program allows the u
 # NEEDS UPDATES
 # Let's make this a maven project so people can easily clone and build the repo for easy use
 ### How to use:
-1. Must have the Java Swing and Java AWT Libraries
-2. Updating the settings file
+1. Must have JDK installed. (JDK 21 was most recently used on this project)
+2. Must have Maven installed. (Maven 3.9.6 was most recently used on this project)
+3. Clone repo down to desired location
+4. In the base folder of cloned repo:
+    1. Run 'mvn clean package'. This will create a ~/Enigma-Machine/target directory where a Enigma-Machine-2.0.jar will be generated.
+5. Run 'java -jar <path to Enigma-Machine>/target/Enigma-Machine-2.0.jar'
+6. Updating the settings file
     * The settings file is preloaded with random settings which you can use without editing, if you'd like. If you'd like to edit these settings, however, the following form for the settings.txt file must be followed
     * Settings.txt form:
     * rotor 1 - Ex) <a,b,c,d,...> (You should have no spaces between commas and letters)
@@ -16,7 +21,7 @@ This code aims to emulate the enigma machine. When run, the program allows the u
     * rotor 3 - Same as rotor 1
     * reflector - Ex) <(a,b),(c,d),...> (You must have 13 pairs for this section. Each letter should only have 1 pairing as well.)
     * plugboard - Same as reflector, however, you can have anywhere from 0 to 13 pairs.
-    * The program must be restarted in order to use your most recent updated to the settings.txt file. (Let's try to make this dynamic and immediately updated when user updates file, or have window to update these values within the application)
+    * The program must be recompiled in order to use your most recent updates to the settings.txt file. It is planned to make this more dynamic so this is not required.
  
 ### More information:
 * https://en.wikipedia.org/wiki/Alan_Turing
