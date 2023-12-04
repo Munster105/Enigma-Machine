@@ -1,6 +1,6 @@
-package core;
+package com.enigmamachine.app.core;
 
-import constants.Constants;
+import com.enigmamachine.app.constants.Constants;
 import java.util.*;
 
 public class Rotor {

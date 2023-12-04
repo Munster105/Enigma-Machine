@@ -1,9 +1,9 @@
-package ui;
+package com.enigmamachine.app.ui;
 
-import constants.Constants;
-import constants.JTextFieldLimit;
-import core.EnigmaMachine;
-import core.Rotor;
+import com.enigmamachine.app.constants.Constants;
+import com.enigmamachine.app.constants.JTextFieldLimit;
+import com.enigmamachine.app.core.EnigmaMachine;
+import com.enigmamachine.app.core.Rotor;
 
 import javax.swing.*;
 import java.awt.*;

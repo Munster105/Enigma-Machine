@@ -1,4 +1,4 @@
-package constants;
+package com.enigmamachine.app.constants;
 
 import javax.swing.text.PlainDocument;
 import javax.swing.text.AttributeSet;

@@ -1,4 +1,4 @@
-package constants;
+package com.enigmamachine.app.constants;
 
 public class Constants {
     public static final int numLetters = 26;
