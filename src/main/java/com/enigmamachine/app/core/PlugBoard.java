@@ -6,7 +6,7 @@ import java.util.Map;
 public class PlugBoard {
     private HashMap<Character, Character> plugBoard;
 
-    public PlugBoard(HashMap<Character, Character> plugBoard) {
+    public PlugBoard() {
         this.plugBoard = initDefaultplugBoard();
     }
 
@@ -35,6 +35,10 @@ public class PlugBoard {
         plugBoard.putAll(plugInverse);
 
         return plugBoard;
+    }
+
+    public HashMap<Character, Character> getPlugboard() {
+        return this.plugBoard;
     }
 
     public void setplugBoard(HashMap<Character, Character> plugBoardSettings) {

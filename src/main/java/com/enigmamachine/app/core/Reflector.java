@@ -6,7 +6,7 @@ import java.util.Map;
 public class Reflector {
     private HashMap<Character, Character> reflector;
 
-    public Reflector(HashMap<Character, Character> reflector){
+    public Reflector(){
         this.reflector = initDefaultReflector();
     }
 
@@ -37,6 +37,10 @@ public class Reflector {
         reflector.putAll(reflectorInverse);
 
         return reflector;
+    }
+
+    public HashMap<Character, Character> getReflector() {
+        return this.reflector;
     }
 
     public void setReflector(HashMap<Character, Character> reflectorSettings) {

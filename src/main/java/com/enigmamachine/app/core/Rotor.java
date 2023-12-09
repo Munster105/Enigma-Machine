@@ -9,7 +9,7 @@ public class Rotor {
     private int rotorNum;
     private int prevNumSpins, numSpins;
 
-    public Rotor(int rotorNum, ArrayList<Character> inputSide) {
+    public Rotor(int rotorNum) {
         this.inputSide = initInputSide();
         this.outputSide = Arrays.asList(getOutputList(inputSide));
         this.rotorNum = rotorNum;
@@ -17,7 +17,9 @@ public class Rotor {
     }
 
     private List<Character> initInputSide() {
-        inputSide = new ArrayList<Character>(List.of('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'));
+        inputSide = new ArrayList<Character>(
+                List.of('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+                        't', 'u', 'v', 'w', 'x', 'y', 'z'));
 
         return inputSide;
     }
@@ -44,7 +46,7 @@ public class Rotor {
         List<Character> buffer = new ArrayList<>(this.inputSide);
         System.out.println("Spinning rotor num: " + this.rotorNum);
         for (int i = 0; i < this.inputSide.size(); i++) {
-            int index = ((i - 1) + Constants.numLetters) % Constants.numLetters;
+            int index = ((i - 1) + Constants.alphabetLength) % Constants.alphabetLength;
             Character temp = this.inputSide.get(index);
             if (temp == Constants.lastLetter) {
                 temp = 'a';
@@ -63,7 +65,7 @@ public class Rotor {
         List<Character> buffer = new ArrayList<>(this.inputSide);
         System.out.println("Spinning rotor num: " + this.rotorNum);
         for (int i = 0; i < this.inputSide.size(); i++) {
-            int index = ((i + 1) % Constants.numLetters);
+            int index = ((i + 1) % Constants.alphabetLength);
             Character temp = this.inputSide.get(index);
             if (temp == Constants.firstLetter) {
                 temp = 'z';

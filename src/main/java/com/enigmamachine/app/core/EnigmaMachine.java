@@ -8,21 +8,19 @@ public class EnigmaMachine {
     private Reflector reflector;
     private ArrayList<Rotor> rotors;
 
-    public EnigmaMachine(ArrayList<ArrayList<Character>> rotorSettings, HashMap<Character, Character> pbSettings,
-            HashMap<Character, Character> reflectorSettings) {
-        initComponents(rotorSettings, pbSettings, reflectorSettings);
+    public EnigmaMachine() {
+        initComponents();
     }
 
-    private void initComponents(ArrayList<ArrayList<Character>> rotorSettings, HashMap<Character, Character> pbSettings,
-            HashMap<Character, Character> reflectorSettings) {
-        pb = new PlugBoard(pbSettings);
+    private void initComponents() {
+        pb = new PlugBoard();
 
-        reflector = new Reflector(reflectorSettings);
+        reflector = new Reflector();
 
         rotors = new ArrayList<>();
-        Rotor rotor1 = new Rotor(1, rotorSettings.get(0));
-        Rotor rotor2 = new Rotor(2, rotorSettings.get(1));
-        Rotor rotor3 = new Rotor(3, rotorSettings.get(2));
+        Rotor rotor1 = new Rotor(1);
+        Rotor rotor2 = new Rotor(2);
+        Rotor rotor3 = new Rotor(3);
         rotors.add(rotor1);
         rotors.add(rotor2);
         rotors.add(rotor3);
@@ -67,7 +65,7 @@ public class EnigmaMachine {
                 r.spinRotor();
                 r.setNumSpins(r.getNumSpins() + 1);
                 // Then evaluate if you're done rotating
-                prevComplete = r.getNumSpins() >= Constants.numLetters;
+                prevComplete = r.getNumSpins() >= Constants.alphabetLength;
                 System.out.println(prevComplete + "////////////////////////////////////////////");
                 // If so, reset spin counter and prevComplete = true
                 if (prevComplete) {
