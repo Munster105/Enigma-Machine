@@ -4,37 +4,47 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PlugBoard {
-    private HashMap<Character, Character> board;
+    private HashMap<Character, Character> plugBoard;
 
-    public PlugBoard(HashMap<Character, Character> board) {
-        initDefaultBoard();
+    public PlugBoard(HashMap<Character, Character> plugBoard) {
+        this.plugBoard = initDefaultplugBoard();
     }
 
-    private void initDefaultBoard() {
-        this.board = new HashMap<>();
-        this.board.put('a', 'z');
-        this.board.put('b', 'y');
-        this.board.put('c', 'x');
-        this.board.put('d', 'w');
-        this.board.put('e', 'v');
-        this.board.put('f', 'u');
-        this.board.put('g', 't');
-        this.board.put('h', 's');
-        this.board.put('i', 'r');
-        this.board.put('j', 'q');
-        this.board.put('k', 'p');
-        this.board.put('l', 'o');
-        this.board.put('m', 'n');
+    private HashMap<Character, Character> initDefaultplugBoard() {
+        plugBoard = new HashMap<Character, Character>();
+        plugBoard.put('a', 'z');
+        plugBoard.put('b', 'y');
+        plugBoard.put('c', 'x');
+        plugBoard.put('d', 'w');
+        plugBoard.put('e', 'v');
+        plugBoard.put('f', 'u');
+        plugBoard.put('g', 't');
+        plugBoard.put('h', 's');
+        plugBoard.put('i', 'r');
+        plugBoard.put('j', 'q');
+        plugBoard.put('k', 'p');
+        plugBoard.put('l', 'o');
+        plugBoard.put('m', 'n');
+
+        // Have to create the inverses of above
+        HashMap<Character, Character> plugInverse = new HashMap<Character, Character>();
+        for (Map.Entry<Character, Character> entry : plugBoard.entrySet()) {
+            plugInverse.put(entry.getValue(), entry.getKey());
+        }
+
+        plugBoard.putAll(plugInverse);
+
+        return plugBoard;
     }
 
-    public void setBoard(HashMap<Character, Character> plugBoardSettings) {
-        this.board = plugBoardSettings;
+    public void setplugBoard(HashMap<Character, Character> plugBoardSettings) {
+        this.plugBoard = plugBoardSettings;
     }
 
     public Character getPlugValue(Character c) {
-        if (board.get(c) == null) {
+        if (plugBoard.get(c) == null) {
             return c;
         } else
-            return board.get(c);
+            return plugBoard.get(c);
     }
 }

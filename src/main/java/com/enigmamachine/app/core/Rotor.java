@@ -4,42 +4,48 @@ import com.enigmamachine.app.constants.Constants;
 import java.util.*;
 
 public class Rotor {
-    private List<Character> InputSide;
-    private List<Character> OutputSide;
+    private List<Character> inputSide;
+    private List<Character> outputSide;
     private int rotorNum;
     private int prevNumSpins, numSpins;
 
     public Rotor(int rotorNum, ArrayList<Character> inputSide) {
-        this.InputSide = inputSide;
-        this.OutputSide = Arrays.asList(getOutputList(InputSide));
+        this.inputSide = initInputSide();
+        this.outputSide = Arrays.asList(getOutputList(inputSide));
         this.rotorNum = rotorNum;
         this.numSpins = 0;
     }
 
+    private List<Character> initInputSide() {
+        inputSide = new ArrayList<Character>(List.of('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'));
+
+        return inputSide;
+    }
+
     private Character[] getOutputList(List<Character> input) {
-        Character[] temp = new Character[input.size()];
+        Character[] outputSide = new Character[input.size()];
         for (int i = 0; i < input.size(); i++) {
             Character newChar = (Character) (char) (i + 'a');
-            int index = Character.getNumericValue(InputSide.get(i)) - 10;
-            temp[index] = newChar;
+            int index = Character.getNumericValue(inputSide.get(i)) - 10;
+            outputSide[index] = newChar;
         }
-        return temp;
+        return outputSide;
     }
 
     public Character getInputSideRotorValue(int charVal) {
-        return this.InputSide.get(charVal);
+        return this.inputSide.get(charVal);
     }
 
     public Character getOutputSideRotorValue(int charVal) {
-        return this.OutputSide.get(charVal);
+        return this.outputSide.get(charVal);
     }
 
     public void spinRotor() {
-        List<Character> buffer = new ArrayList<>(this.InputSide);
+        List<Character> buffer = new ArrayList<>(this.inputSide);
         System.out.println("Spinning rotor num: " + this.rotorNum);
-        for (int i = 0; i < this.InputSide.size(); i++) {
+        for (int i = 0; i < this.inputSide.size(); i++) {
             int index = ((i - 1) + Constants.numLetters) % Constants.numLetters;
-            Character temp = this.InputSide.get(index);
+            Character temp = this.inputSide.get(index);
             if (temp == Constants.lastLetter) {
                 temp = 'a';
             } else {
@@ -47,18 +53,18 @@ public class Rotor {
             }
             buffer.set(i, temp);
         }
-        Collections.copy(this.InputSide, buffer);
-        this.OutputSide = Arrays.asList(getOutputList(InputSide));
-        System.out.println("Input side: " + this.InputSide);
-        System.out.println("Output side: " + this.OutputSide);
+        Collections.copy(this.inputSide, buffer);
+        this.outputSide = Arrays.asList(getOutputList(inputSide));
+        System.out.println("Input side: " + this.inputSide);
+        System.out.println("Output side: " + this.outputSide);
     }
 
     public void reverseRotor() {
-        List<Character> buffer = new ArrayList<>(this.InputSide);
+        List<Character> buffer = new ArrayList<>(this.inputSide);
         System.out.println("Spinning rotor num: " + this.rotorNum);
-        for (int i = 0; i < this.InputSide.size(); i++) {
+        for (int i = 0; i < this.inputSide.size(); i++) {
             int index = ((i + 1) % Constants.numLetters);
-            Character temp = this.InputSide.get(index);
+            Character temp = this.inputSide.get(index);
             if (temp == Constants.firstLetter) {
                 temp = 'z';
             } else {
@@ -66,10 +72,10 @@ public class Rotor {
             }
             buffer.set(i, temp);
         }
-        Collections.copy(this.InputSide, buffer);
-        this.OutputSide = Arrays.asList(getOutputList(InputSide));
-        System.out.println("Input side: " + this.InputSide);
-        System.out.println("Output side: " + this.OutputSide);
+        Collections.copy(this.inputSide, buffer);
+        this.outputSide = Arrays.asList(getOutputList(inputSide));
+        System.out.println("Input side: " + this.inputSide);
+        System.out.println("Output side: " + this.outputSide);
     }
 
     public int getNumSpins() {
@@ -89,11 +95,11 @@ public class Rotor {
     }
 
     public List<Character> getInputSide() {
-        return this.InputSide;
+        return this.inputSide;
     }
 
     public List<Character> getOutputSide() {
-        return this.OutputSide;
+        return this.outputSide;
     }
 
     public int getRotorNum() {
