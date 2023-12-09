@@ -1,32 +1,21 @@
 package com.enigmamachine.app.core;
 
 import com.enigmamachine.app.constants.Constants;
-import java.util.*;
+
+import java.util.ArrayList;
 
 public class EnigmaMachine {
-    private PlugBoard pb;
-    private Reflector reflector;
-    private ArrayList<Rotor> rotors;
+    private static PlugBoard pb = new PlugBoard();
+    private static Reflector reflector = new Reflector();
+    private static ArrayList<Rotor> rotors = new ArrayList<Rotor>() {
+        {
+            add(new Rotor(1));
+            add(new Rotor(2));
+            add(new Rotor(3));
+        }
+    };
 
-    public EnigmaMachine() {
-        initComponents();
-    }
-
-    private void initComponents() {
-        pb = new PlugBoard();
-
-        reflector = new Reflector();
-
-        rotors = new ArrayList<>();
-        Rotor rotor1 = new Rotor(1);
-        Rotor rotor2 = new Rotor(2);
-        Rotor rotor3 = new Rotor(3);
-        rotors.add(rotor1);
-        rotors.add(rotor2);
-        rotors.add(rotor3);
-    }
-
-    public Character useMachine(Character input) {
+    public static Character useMachine(Character input) {
         // Get input to start the while loop
         Character c = input;
         System.out.println("Rotors: ");
@@ -78,7 +67,7 @@ public class EnigmaMachine {
         return c;
     }
 
-    private Character getInputRotorsVal(int c) {
+    private static Character getInputRotorsVal(int c) {
         Character ret = 'a';
         for (int i = 0; i < rotors.size(); i++) {
             ret = rotors.get(i).getInputSideRotorValue(c);
@@ -89,7 +78,7 @@ public class EnigmaMachine {
         return ret;
     }
 
-    private Character getOutputRotorsVal(int c) {
+    private static Character getOutputRotorsVal(int c) {
         Character ret = 'a';
         for (int i = (rotors.size() - 1); i > -1; i--) {
             ret = rotors.get(i).getOutputSideRotorValue(c);
@@ -100,7 +89,7 @@ public class EnigmaMachine {
         return ret;
     }
 
-    public ArrayList<Rotor> getRotors() {
-        return this.rotors;
+    public static ArrayList<Rotor> getRotors() {
+        return rotors;
     }
 }
