@@ -4,6 +4,7 @@ import com.enigmamachine.app.constants.Constants;
 import java.util.*;
 
 public class Rotor {
+    // Should really be set array sizes of Constants.alphabetSize
     private List<Character> inputSide;
     private List<Character> outputSide;
     private int rotorNum;
@@ -98,6 +99,11 @@ public class Rotor {
 
     public List<Character> getInputSide() {
         return this.inputSide;
+    }
+    
+    public void setInputSide(List<Character> inputSide) {
+        this.inputSide = inputSide;
+        this.outputSide = Arrays.asList(getOutputList(inputSide));
     }
 
     public List<Character> getOutputSide() {

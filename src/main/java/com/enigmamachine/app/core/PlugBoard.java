@@ -11,28 +11,8 @@ public class PlugBoard {
     }
 
     private HashMap<Character, Character> initDefaultplugBoard() {
+        // Default plugboard should be no encryption
         plugBoard = new HashMap<Character, Character>();
-        plugBoard.put('a', 'z');
-        plugBoard.put('b', 'y');
-        plugBoard.put('c', 'x');
-        plugBoard.put('d', 'w');
-        plugBoard.put('e', 'v');
-        plugBoard.put('f', 'u');
-        plugBoard.put('g', 't');
-        plugBoard.put('h', 's');
-        plugBoard.put('i', 'r');
-        plugBoard.put('j', 'q');
-        plugBoard.put('k', 'p');
-        plugBoard.put('l', 'o');
-        plugBoard.put('m', 'n');
-
-        // Have to create the inverses of above
-        HashMap<Character, Character> plugInverse = new HashMap<Character, Character>();
-        for (Map.Entry<Character, Character> entry : plugBoard.entrySet()) {
-            plugInverse.put(entry.getValue(), entry.getKey());
-        }
-
-        plugBoard.putAll(plugInverse);
 
         return plugBoard;
     }

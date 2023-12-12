@@ -6,11 +6,12 @@ import java.util.Map;
 public class Reflector {
     private HashMap<Character, Character> reflector;
 
-    public Reflector(){
+    public Reflector() {
         this.reflector = initDefaultReflector();
     }
 
     private HashMap<Character, Character> initDefaultReflector() {
+        // Reflector MUST have settings for every letter
         HashMap<Character, Character> reflector = new HashMap<>();
         // Defines the characters that are initially paired up
         // i.e. 'a' outputs 'z' and 'z' outputs 'a'
@@ -30,7 +31,7 @@ public class Reflector {
 
         // Have to create the inverses of above
         HashMap<Character, Character> reflectorInverse = new HashMap<>();
-        for (Map.Entry<Character, Character> entry : reflector.entrySet()){
+        for (Map.Entry<Character, Character> entry : reflector.entrySet()) {
             reflectorInverse.put(entry.getValue(), entry.getKey());
         }
 
@@ -47,7 +48,7 @@ public class Reflector {
         this.reflector = reflectorSettings;
     }
 
-    public Character getReflectorVal(Character c){
+    public Character getReflectorVal(Character c) {
         return reflector.get(c);
     }
 }

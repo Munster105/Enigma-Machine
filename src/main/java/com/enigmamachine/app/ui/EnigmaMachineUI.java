@@ -12,7 +12,7 @@ import java.awt.event.*;
 public class EnigmaMachineUI {
     private Dimension screenSize;
     private JFrame frame;
-    private JToolBar toolBar;
+    private JMenuBar menuBar;
     private JPanel mainPanel, rotorsPanel, bottomPanel;
     private JPanel rotor1Panel, rotor2Panel, rotor3Panel;
     private JLabel rotor1Label, rotor2Label, rotor3Label;
@@ -39,7 +39,7 @@ public class EnigmaMachineUI {
 
         setUpRotorsPanel();
         setUpBottomPanel();
-        setupToolBar();
+        setupMenuBar();
 
         // Main content panel houses the rotorPanel and bottomPanel to enable a more
         // customisable layout of the panels
@@ -47,17 +47,30 @@ public class EnigmaMachineUI {
         this.mainPanel.add(Box.createVerticalGlue());
         this.mainPanel.add(bottomPanel, Component.CENTER_ALIGNMENT);
 
-        this.frame.add(this.toolBar, BorderLayout.NORTH);
+        this.frame.setJMenuBar(this.menuBar);
         this.frame.getContentPane().add(mainPanel);
         this.frame.setMinimumSize(new Dimension(700, 700));
         this.frame.setVisible(true);
     }
 
-    private void setupToolBar() {
-        this.toolBar = new JToolBar();
-        JPanel toolBarPanel = new JPanel();
+    private void setupMenuBar() {
+        this.menuBar = new JMenuBar();
 
-        this.toolBar.add(toolBarPanel);
+        JMenu menu = new JMenu("File");
+
+        JMenuItem settingsItem = new JMenuItem("Settings");
+        settingsItem.addActionListener(new ActionListener() {
+            // TODO: Add in open settings panel
+        });
+        JMenuItem aboutItem = new JMenuItem("About");
+        aboutItem.addActionListener(new ActionListener() {
+            // TODO: Add dialog explaining some simple details about project, motivations, etc.
+        });
+
+        menu.add(settingsItem);
+        menu.add(aboutItem);
+
+        this.menuBar.add(menu);
     }
 
     private void setUpRotorsPanel() {
