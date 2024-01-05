@@ -4,9 +4,9 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-public class RadialEditorPanel extends JPanel {
+public class RadialSettingEditorPanel extends JPanel {
     
-    public RadialEditorPanel() {
+    public RadialSettingEditorPanel() {
         this.setBackground(Color.PINK);
     }
 }

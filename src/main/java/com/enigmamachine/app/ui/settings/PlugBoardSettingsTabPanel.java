@@ -21,7 +21,7 @@ public class PlugBoardSettingsTabPanel extends SettingTabPanel implements Settin
 
     @Override
     public JPanel generateSettingEditorPanel() {
-        return new RadialEditorPanel();
+        return new RadialSettingEditorPanel();
     }
 
     @Override
