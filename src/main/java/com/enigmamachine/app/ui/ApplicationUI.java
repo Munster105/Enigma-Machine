@@ -1,9 +1,12 @@
 package com.enigmamachine.app.ui;
 
 import javax.swing.*;
+
+import com.enigmamachine.app.ui.settings.SettingsTabbedPanel;
+
 import java.awt.*;
 
-public class ApplicationUI extends JFrame{
+public class ApplicationUI extends JFrame {
     private JTabbedPane mainPane;
 
     public ApplicationUI() {
@@ -16,8 +19,8 @@ public class ApplicationUI extends JFrame{
 
         mainPane = new JTabbedPane();
         mainPane.addTab("Enigma Machine", generateEnigmaPanel());
-        mainPane.addTab("Settings", generateSettingPanel());
-        mainPane.addTab("About", generateAboutPanel());
+        mainPane.add("Settings", generateSettingPanel());
+        mainPane.add("About", generateAboutPanel());
         
         this.add(mainPane);
         this.setMinimumSize(new Dimension(700, 700));
@@ -25,15 +28,15 @@ public class ApplicationUI extends JFrame{
         this.setVisible(true);
     }
 
-    private SettingsPanel generateSettingPanel() {
-        return new SettingsPanel();
+    private SettingsTabbedPanel generateSettingPanel() {
+        return new SettingsTabbedPanel();
     }
 
     private JPanel generateAboutPanel() {
         return new JPanel();
     }
 
-    private EngimaPanelUI generateEnigmaPanel() {
-        return new EngimaPanelUI();
+    private EngimaPanel generateEnigmaPanel() {
+        return new EngimaPanel();
     }
 }

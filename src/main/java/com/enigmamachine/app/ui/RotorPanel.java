@@ -15,11 +15,11 @@ import com.enigmamachine.app.constants.Constants;
 import com.enigmamachine.app.core.EnigmaMachine;
 import com.enigmamachine.app.core.Rotor;
 
-public class RotorPanelUI extends JPanel {
+public class RotorPanel extends JPanel {
     private Integer rotorPosition = 1;
     private JLabel rotorLabel;
 
-    public RotorPanelUI(Integer rotorNum) {
+    public RotorPanel(Integer rotorNum) {
         initRotorPanel(rotorNum);
     }
 

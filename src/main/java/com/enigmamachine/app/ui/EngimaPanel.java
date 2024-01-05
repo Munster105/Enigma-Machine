@@ -14,13 +14,13 @@ import com.enigmamachine.app.constants.Constants;
 import com.enigmamachine.app.constants.JTextFieldLimit;
 import com.enigmamachine.app.core.EnigmaMachine;
 
-public class EngimaPanelUI extends JPanel {
+public class EngimaPanel extends JPanel {
     private JPanel rotorsPanel, inputOutputPanel;
-    private ArrayList<RotorPanelUI> rotors = new ArrayList<>();
+    private ArrayList<RotorPanel> rotors = new ArrayList<>();
     private JTextField input;
     private JLabel output;
 
-    public EngimaPanelUI() {
+    public EngimaPanel() {
         this.setLayout(new GridLayout(2, 1));
 
         this.rotorsPanel = generateRotorsPanel();
@@ -37,7 +37,7 @@ public class EngimaPanelUI extends JPanel {
         rotorsPanel.setName("Rotors");
 
         for (int i = 0; i < Constants.numRotors; i++) {
-            rotors.add(new RotorPanelUI(i + 1));
+            rotors.add(new RotorPanel(i + 1));
             rotorsPanel.add(rotors.get(i));
         }
 
