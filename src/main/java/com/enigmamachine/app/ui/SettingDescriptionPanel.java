@@ -3,14 +3,10 @@ package com.enigmamachine.app.ui;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 
-public class SettingDescriptionPanel {
-    private JPanel settingDescriptionPanel = new JPanel();
+public class SettingDescriptionPanel extends JPanel {
+    JFormattedTextField settingsTitleField;
 
     public SettingDescriptionPanel(String settingsTitle, String settingsDescription) {
-        setupSettingDescriptionPanel(settingsTitle, settingsDescription);
+        settingsTitleField = new JFormattedTextField(settingsTitle);
     }
-
-    private void setupSettingDescriptionPanel(String settingsTitle, String settingsDescription) {
-        JFormattedTextField settingsTitleField = new JFormattedTextField(settingsTitle);
-    }    
 }

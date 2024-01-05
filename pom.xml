@@ -51,7 +51,7 @@
                             <manifest>
                                 <addClasspath>true</addClasspath>
                                 <classpathPrefix>lib/</classpathPrefix>
-                                <mainClass>com.enigmamachine.app.EnigmaApp</mainClass>
+                                <mainClass>com.enigmamachine.app.EnigmaController</mainClass>
                             </manifest>
                         </archive>
                     </configuration>

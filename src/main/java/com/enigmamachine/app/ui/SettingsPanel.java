@@ -1,16 +1,21 @@
 package com.enigmamachine.app.ui;
 
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
+import java.awt.GridLayout;
 
-public class SettingsPanel {
-    private JPanel settingsPanel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+public class SettingsPanel extends JTabbedPane {
+    private JPanel reflectorSettings, plugBoardSettings, rotorSettings;
 
     public SettingsPanel() {
-        setupPanel();
-    }
+        this.setLayout(new GridLayout());
+        this.reflectorSettings = new JPanel();
+        this.plugBoardSettings = new JPanel();
+        this.rotorSettings = new JPanel();
 
-    private void setupPanel() {
-        this.settingsPanel.setLayout(new BoxLayout(this.settingsPanel, BoxLayout.Y_AXIS));
+        this.addTab("Reflector", this.reflectorSettings);
+        this.addTab("Plug Board", this.plugBoardSettings);
+        this.addTab("Rotors", this.rotorSettings);
     }
 }

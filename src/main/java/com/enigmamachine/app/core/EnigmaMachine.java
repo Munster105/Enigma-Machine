@@ -15,7 +15,7 @@ public class EnigmaMachine {
         }
     };
 
-    public static Character useMachine(Character input) {
+    public static Character encodeCharacter(Character input) {
         // Get input to start the while loop
         Character c = input;
         System.out.println("Rotors: ");
