@@ -1,5 +1,11 @@
 package com.enigmamachine.app.ui.settings;
 
-public class ComboBoxSettingEditorPanel {
-    
+import java.awt.Color;
+
+import javax.swing.JPanel;
+
+public class ComboBoxSettingEditorPanel extends JPanel {
+    public ComboBoxSettingEditorPanel() {
+        this.setBackground(Color.GREEN);
+    }
 }

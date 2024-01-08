@@ -1,7 +1,6 @@
 package com.enigmamachine.app.ui;
 
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
@@ -71,8 +70,6 @@ public class RotorPanel extends JPanel {
         this.add(rotorLabel);
         this.add(Box.createVerticalGlue());
         this.add(rotorDown);
-
-        this.setPreferredSize(new Dimension(300, 300));
 
         rotorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         rotorUp.setAlignmentX(Component.CENTER_ALIGNMENT);

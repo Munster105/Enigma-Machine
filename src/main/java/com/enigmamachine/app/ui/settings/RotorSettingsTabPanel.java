@@ -1,41 +1,39 @@
 package com.enigmamachine.app.ui.settings;
 
-import javax.swing.JToolBar;
-
-import java.awt.GridBagConstraints;
-
-import javax.swing.JPanel;
-
 public class RotorSettingsTabPanel extends SettingTabPanel implements SettingInterface {
-    // placeholder text
-    private String settingsDescription = "You must have 13 pairs for this section.\n"
-            + "Each letter should only have 1 pairing as well";
-
     public RotorSettingsTabPanel() {
         super();
         settingEditorPanel = generateSettingEditorPanel();
-        settingsDescPanel = generateSettingDescriptionPanel();
+        settingsDescPanel = generateSettingDescriptionPanel(generateSettingTitle(), generateSettingDesc());
         toolBar = generateToolBar();
 
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        add(toolBar, constraints);
-        add(settingEditorPanel);
-        add(settingsDescPanel);
+        add(toolBar, getToolBarConstraints());
+        add(settingEditorPanel, getSettingEditorPanelConstraints());
+        add(settingsDescPanel, getSettingsDescPanelConstraints());
     }
 
     @Override
-    public JPanel generateSettingEditorPanel() {
-        return new JPanel();
+    public ComboBoxSettingEditorPanel generateSettingEditorPanel() {
+        return new ComboBoxSettingEditorPanel();
     }
 
     @Override
-    public SettingDescriptionPanel generateSettingDescriptionPanel() {
-        return new SettingDescriptionPanel("Rotor", settingsDescription);
+    public String generateSettingTitle() {
+        return "Rotors";
     }
 
     @Override
-    public JToolBar generateToolBar() {
-        return new SettingToolBar(true);
+    public String generateSettingDesc() {
+        // TODO: Update the description
+        return "This is the plug board setting. \n" 
+        + "You can select up to 13 pairs of letters denoted by the matching colors under each letter. \n"
+        + "Click a blank letter to start a pair and click a second letter to complete the match.\n"
+        + "Click a non-blank letter to clear the pair. \n"
+        + "Each letter DOES NOT have to have a pair.\n"
+        + "The toolbar has additional tools. \n"
+        + "The default button will revert the settings to the application default. (Not currently working)\n"
+        + "The reset button will clear ALL settings currently set. (Not currently working)\n"
+        + "The random button will set a random set of settings. (Not currently working)\n"
+        + "The save button will save your currently selected settings. (Not currently working)";
     }
 }

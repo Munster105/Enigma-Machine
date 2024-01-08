@@ -50,4 +50,12 @@ public class SettingTabPanel extends JPanel {
 
         return constraints;
     }
+
+    public SettingDescriptionPanel generateSettingDescriptionPanel(String settingTitle, String settingDesc) {
+        return new SettingDescriptionPanel(settingTitle, settingDesc);
+    }
+
+    public JToolBar generateToolBar() {
+        return new SettingToolBar(false);
+    }
 }

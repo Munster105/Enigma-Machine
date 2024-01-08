@@ -4,27 +4,29 @@ import javax.swing.*;
 
 import com.enigmamachine.app.ui.settings.SettingsTabbedPanel;
 
-import java.awt.*;
-
 public class ApplicationUI extends JFrame {
     private JTabbedPane mainPane;
 
     public ApplicationUI() {
         super("Enigma Machine");
-        // Setting up the frame
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout());
-        this.setAutoRequestFocus(true);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         mainPane = new JTabbedPane();
         mainPane.addTab("Enigma Machine", generateEnigmaPanel());
         mainPane.add("Settings", generateSettingPanel());
         mainPane.add("About", generateAboutPanel());
-        
+
         this.add(mainPane);
-        this.setMinimumSize(new Dimension(700, 700));
+
+        // Setting up the frame
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setAutoRequestFocus(true);
         this.pack();
+        // Stops it from being able to be sized down from it's initial size.
+        // This allows us to essentally have a minsize based on the other components
+        // in the application, namely we don't want to be able to size the editor panel
+        // down too much
+        this.setMinimumSize(this.getSize());
+
         this.setVisible(true);
     }
 

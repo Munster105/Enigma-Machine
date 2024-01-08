@@ -102,8 +102,6 @@ public class EngimaPanel extends JPanel {
         inputOutputPanel.add(output);
         inputOutputPanel.add(input);
 
-        inputOutputPanel.setPreferredSize(new Dimension(600, 500));
-
         return inputOutputPanel;
     }
 

@@ -1,34 +1,55 @@
 package com.enigmamachine.app.ui.settings;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.text.ParseException;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
-public class SettingDescriptionPanel extends JFormattedTextField {
+public class SettingDescriptionPanel extends JPanel {
 
-    public SettingDescriptionPanel(String settingTitle, String settingDescription) {
+    public SettingDescriptionPanel(String settingTitleText, String settingDescriptionText) {
         this.setBackground(Color.BLACK);
-        this.setFormatter(generateTextFieldFormatter());
-        this.setValue(settingDescription);
+        this.setLayout(new GridBagLayout());
+
+        GridBagConstraints constraint = new GridBagConstraints();
+        constraint.fill = GridBagConstraints.HORIZONTAL;
+        constraint.gridy = 0;
+        this.add(generateSettingTitle(settingTitleText), constraint);
+
+        constraint.fill = GridBagConstraints.HORIZONTAL;
+        constraint.gridy = 1;
+        constraint.weighty = 1;
+        this.add(generateSettingDesc(settingDescriptionText), constraint);
     }
 
-    private AbstractFormatter generateTextFieldFormatter() {
-        AbstractFormatter formatter = new AbstractFormatter() {
-            @Override
-            public Object stringToValue(String text) throws ParseException {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'stringToValue'");
-            }
+    private JFormattedTextField generateSettingTitle(String settingTitleText) {
+        JFormattedTextField settingTitle =  new JFormattedTextField(settingTitleText);
 
-            @Override
-            public String valueToString(Object value) throws ParseException {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'valueToString'");
-            }
-            
-        };
-        
-        return formatter; 
+        settingTitle.setHorizontalAlignment(JTextField.CENTER);
+        settingTitle.setFocusable(false);
+        settingTitle.setEditable(false);
+
+        settingTitle.setFont(new Font(Font.SERIF, Font.BOLD, 80));
+
+        return settingTitle;
+    }
+
+    private JTextArea generateSettingDesc(String settingDescriptionText) {
+        JTextArea settingDesc = new JTextArea(settingDescriptionText, 1, 40);
+
+        settingDesc.setFocusable(false);
+        settingDesc.setEditable(false);
+        settingDesc.setWrapStyleWord(true);
+        settingDesc.setLineWrap(true);
+
+        settingDesc.setFont(new Font(Font.SERIF, Font.PLAIN, 20));
+
+        return settingDesc;
     }
 }
