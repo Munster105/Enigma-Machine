@@ -1,11 +1,22 @@
 package com.enigmamachine.app.ui.settings;
 
-public class PlugBoardSettingsTabPanel extends SettingTabPanel implements SettingInterface {    
-    public PlugBoardSettingsTabPanel() {
+import java.util.HashMap;
+
+import com.enigmamachine.app.core.PlugBoard;
+
+public class PlugBoardSettingsTabPanel extends SettingTabPanel implements SettingInterface {   
+
+    // Keeps track of all the pairs selected by the user
+    HashMap<Character, Character> pairs = new HashMap<>();
+
+    PlugBoard plugBoard;
+
+    public PlugBoardSettingsTabPanel(PlugBoard plugBoard) {
         super();
-        settingEditorPanel = generateSettingEditorPanel();
-        settingsDescPanel = generateSettingDescriptionPanel(generateSettingTitle(), generateSettingDesc());
-        toolBar = generateToolBar();
+        this.plugBoard = plugBoard;
+        this.settingEditorPanel = generateSettingEditorPanel();
+        this.settingsDescPanel = generateSettingDescriptionPanel(generateSettingTitle(), generateSettingDesc());
+        this.toolBar = generateToolBar();
 
         add(toolBar, getToolBarConstraints());
         add(settingEditorPanel, getSettingEditorPanelConstraints());
@@ -13,8 +24,8 @@ public class PlugBoardSettingsTabPanel extends SettingTabPanel implements Settin
     }
 
     @Override
-    public RadialSettingEditorPanel generateSettingEditorPanel() {
-        return new RadialSettingEditorPanel();
+    public RadioSettingEditorPanel generateSettingEditorPanel() {
+        return new RadioSettingEditorPanel(this.plugBoard.getPlugboard());
     }
 
     @Override

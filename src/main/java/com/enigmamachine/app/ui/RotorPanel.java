@@ -2,6 +2,7 @@ package com.enigmamachine.app.ui;
 
 import java.awt.Component;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -11,14 +12,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.enigmamachine.app.constants.Constants;
-import com.enigmamachine.app.core.EnigmaMachine;
 import com.enigmamachine.app.core.Rotor;
 
 public class RotorPanel extends JPanel {
     private Integer rotorPosition = 1;
     private JLabel rotorLabel;
+    private ArrayList<Rotor> rotors;
 
-    public RotorPanel(Integer rotorNum) {
+    public RotorPanel(Integer rotorNum, ArrayList<Rotor> rotors) {
+        this.rotors = rotors;
         initRotorPanel(rotorNum);
     }
 
@@ -44,8 +46,8 @@ public class RotorPanel extends JPanel {
         rotorUp.setFont(new Font(Font.SERIF, Font.BOLD, 40));
         rotorUp.addActionListener(e -> {
             rotorPosition = (rotorPosition + 1 > Constants.alphabetLength) ? 1 : (rotorPosition + 1);
-            EnigmaMachine.getRotors().get(0).spinRotor();
-            for (Rotor r : EnigmaMachine.getRotors()) {
+            this.rotors.get(0).spinRotor();
+            for (Rotor r : this.rotors) {
                 r.setNumSpins(0);
                 r.setPrevNumSpins(0);
             }
@@ -57,8 +59,8 @@ public class RotorPanel extends JPanel {
         rotorDown.setFont(new Font(Font.SERIF, Font.BOLD, 40));
         rotorDown.addActionListener(e -> {
             rotorPosition = (rotorPosition - 1 < 1) ? Constants.alphabetLength : (rotorPosition - 1);
-            EnigmaMachine.getRotors().get(0).reverseRotor();
-            for (Rotor r : EnigmaMachine.getRotors()) {
+            this.rotors.get(0).reverseRotor();
+            for (Rotor r : this.rotors) {
                 r.setNumSpins(0);
                 r.setPrevNumSpins(0);
             }

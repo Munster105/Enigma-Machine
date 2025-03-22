@@ -1,12 +1,20 @@
 package com.enigmamachine.app.ui.settings;
 
-public class RotorSettingsTabPanel extends SettingTabPanel implements SettingInterface {
-    public RotorSettingsTabPanel() {
-        super();
-        settingEditorPanel = generateSettingEditorPanel();
-        settingsDescPanel = generateSettingDescriptionPanel(generateSettingTitle(), generateSettingDesc());
-        toolBar = generateToolBar();
+import java.util.ArrayList;
 
+import com.enigmamachine.app.core.Rotor;
+
+public class RotorSettingsTabPanel extends SettingTabPanel implements SettingInterface {
+
+    ArrayList<Rotor> rotors;
+
+    public RotorSettingsTabPanel(ArrayList<Rotor> rotors) {
+        super();
+        this.settingEditorPanel = generateSettingEditorPanel();
+        this.settingsDescPanel = generateSettingDescriptionPanel(generateSettingTitle(), generateSettingDesc());
+        this.toolBar = generateToolBar();
+
+        this.rotors = rotors;
         add(toolBar, getToolBarConstraints());
         add(settingEditorPanel, getSettingEditorPanelConstraints());
         add(settingsDescPanel, getSettingsDescPanelConstraints());

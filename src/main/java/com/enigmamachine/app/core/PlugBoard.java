@@ -1,7 +1,6 @@
 package com.enigmamachine.app.core;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class PlugBoard {
     private HashMap<Character, Character> plugBoard;
@@ -12,7 +11,7 @@ public class PlugBoard {
 
     private HashMap<Character, Character> initDefaultplugBoard() {
         // Default plugboard should be no encryption
-        plugBoard = new HashMap<Character, Character>();
+        this.setPlugBoard(new HashMap<Character, Character>());
 
         return plugBoard;
     }
@@ -21,7 +20,7 @@ public class PlugBoard {
         return this.plugBoard;
     }
 
-    public void setplugBoard(HashMap<Character, Character> plugBoardSettings) {
+    public void setPlugBoard(HashMap<Character, Character> plugBoardSettings) {
         this.plugBoard = plugBoardSettings;
     }
 

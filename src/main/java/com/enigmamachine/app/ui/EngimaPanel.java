@@ -19,9 +19,12 @@ public class EngimaPanel extends JPanel {
     private ArrayList<RotorPanel> rotors = new ArrayList<>();
     private JTextField input;
     private JLabel output;
+    private EnigmaMachine enigmaMachine;
 
-    public EngimaPanel() {
+    public EngimaPanel(EnigmaMachine enigmaMachine) {
         this.setLayout(new GridLayout(2, 1));
+
+        this.enigmaMachine = enigmaMachine;
 
         this.rotorsPanel = generateRotorsPanel();
         this.inputOutputPanel = generateInputOutputPanel();
@@ -37,7 +40,7 @@ public class EngimaPanel extends JPanel {
         rotorsPanel.setName("Rotors");
 
         for (int i = 0; i < Constants.numRotors; i++) {
-            rotors.add(new RotorPanel(i + 1));
+            rotors.add(new RotorPanel(i + 1, this.enigmaMachine.getRotors()));
             rotorsPanel.add(rotors.get(i));
         }
 
@@ -61,7 +64,12 @@ public class EngimaPanel extends JPanel {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z') {
                     input.setText(String.valueOf(e.getKeyChar()));
-                    output.setText(EnigmaMachine.encodeCharacter(e.getKeyChar()).toString());
+                    String outputText = enigmaMachine.encodeCharacter(e.getKeyChar()).toString();
+                    if (outputText == null) {
+                        System.out.println("There was an issue encrypting the letter: " + e.getKeyChar());
+                        System.exit(1);
+                    }
+                    output.setText(outputText);
                     // We can't just get the num spins because that is not always the right value if
                     // the user changes the rotor position
                     // We know that the first rotor should spin on every keypress

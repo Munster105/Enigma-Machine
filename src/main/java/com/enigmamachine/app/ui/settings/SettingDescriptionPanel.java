@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.text.ParseException;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;

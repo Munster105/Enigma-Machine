@@ -1,20 +1,16 @@
 package com.enigmamachine.app.ui.settings;
 
-import javax.swing.JToolBar;
-
-import java.awt.GridBagConstraints;
-
-import javax.swing.JPanel;
+import com.enigmamachine.app.core.Reflector;
 
 public class ReflectorSettingsTabPanel extends SettingTabPanel implements SettingInterface {
-    private String settingsDescription = "You must have 13 pairs for this section.\n"
-            + "Each letter should only have 1 pairing as well";
+    private Reflector reflector;
 
-    public ReflectorSettingsTabPanel() {
+    public ReflectorSettingsTabPanel(Reflector reflector) {
         super();
-        settingEditorPanel = generateSettingEditorPanel();
-        settingsDescPanel = generateSettingDescriptionPanel(generateSettingTitle(), generateSettingDesc());
-        toolBar = generateToolBar();
+        this.reflector = reflector;
+        this.settingEditorPanel = generateSettingEditorPanel();
+        this.settingsDescPanel = generateSettingDescriptionPanel(generateSettingTitle(), generateSettingDesc());
+        this.toolBar = generateToolBar();
 
         add(toolBar, getToolBarConstraints());
         add(settingEditorPanel, getSettingEditorPanelConstraints());
@@ -22,8 +18,8 @@ public class ReflectorSettingsTabPanel extends SettingTabPanel implements Settin
     }
 
     @Override
-    public RadialSettingEditorPanel generateSettingEditorPanel() {
-        return new RadialSettingEditorPanel();
+    public RadioSettingEditorPanel generateSettingEditorPanel() {
+        return new RadioSettingEditorPanel(this.reflector.getReflector());
     }
 
     @Override

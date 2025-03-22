@@ -5,18 +5,23 @@ import com.enigmamachine.app.constants.Constants;
 import java.util.ArrayList;
 
 public class EnigmaMachine {
-    private static PlugBoard pb = new PlugBoard();
-    private static Reflector reflector = new Reflector();
-    private static ArrayList<Rotor> rotors = new ArrayList<Rotor>() {
-        {
-            add(new Rotor(1));
-            add(new Rotor(2));
-            add(new Rotor(3));
-        }
-    };
+    private PlugBoard pb = null;
+    private Reflector reflector = null;
+    private ArrayList<Rotor> rotors = null;
 
-    public static Character encodeCharacter(Character input) {
-        // Get input to start the while loop
+    public EnigmaMachine() {
+        this.pb = new PlugBoard();
+        this.reflector = new Reflector();
+        this.rotors = new ArrayList<Rotor>() {
+            {
+                add(new Rotor(1));
+                add(new Rotor(2));
+                add(new Rotor(3));
+            }
+        };
+    }
+
+    public Character encodeCharacter(Character input) {
         Character c = input;
         System.out.println("Rotors: ");
         for (Rotor r : rotors) {
@@ -26,13 +31,17 @@ public class EnigmaMachine {
             System.out.println();
         }
         System.out.println("Input: " + c);
-        c = pb.getPlugValue(c);
+        Character plugVal = pb.getPlugValue(c);
 
-        System.out.println("First plugboard output: " + c);
-        c = getInputRotorsVal(Character.getNumericValue(c) - 10);
+        System.out.println("First plugboard output: " + plugVal);
+        Character rotorVal = getInputRotorsVal(Character.getNumericValue(plugVal) - 10);
 
-        System.out.println("First rotors output: " + c);
-        c = reflector.getReflectorVal(c);
+        System.out.println("First rotors output: " + rotorVal);
+
+        Character reflectorVal = reflector.getReflectorVal(rotorVal);
+        if (reflectorVal == null) {
+            return null;
+        }
 
         System.out.println("Core.Reflector output: " + c);
         c = getOutputRotorsVal(Character.getNumericValue(c) - 10);
@@ -67,7 +76,7 @@ public class EnigmaMachine {
         return c;
     }
 
-    private static Character getInputRotorsVal(int c) {
+    private Character getInputRotorsVal(int c) {
         Character ret = 'a';
         for (int i = 0; i < rotors.size(); i++) {
             ret = rotors.get(i).getInputSideRotorValue(c);
@@ -78,7 +87,7 @@ public class EnigmaMachine {
         return ret;
     }
 
-    private static Character getOutputRotorsVal(int c) {
+    private Character getOutputRotorsVal(int c) {
         Character ret = 'a';
         for (int i = (rotors.size() - 1); i > -1; i--) {
             ret = rotors.get(i).getOutputSideRotorValue(c);
@@ -89,7 +98,15 @@ public class EnigmaMachine {
         return ret;
     }
 
-    public static ArrayList<Rotor> getRotors() {
+    public ArrayList<Rotor> getRotors() {
         return rotors;
+    }
+
+    public PlugBoard getPlugBoard() {
+        return pb;
+    }
+
+    public Reflector getReflector() {
+        return reflector;
     }
 }
